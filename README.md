@@ -1,2 +1,2 @@
 # the_planets
-Planetary stability hthought experiment
+Planetary stability thought experiment
