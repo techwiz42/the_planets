@@ -164,8 +164,8 @@ def simulate_gpu(num_planets, years, base_dt, perturbation_angle):
 
     return max_deviation * 180 / np.pi, energy_deviation, angular_momentum_deviation
 
-def run_simulations():
-    planet_numbers = range(2, 201)
+def run_simulations(num_bodies, num_years):
+    planet_numbers = range(2, num_bodies)
     stability_measures = []
     energy_deviations = []
     angular_momentum_deviations = []
@@ -173,8 +173,8 @@ def run_simulations():
     for N in planet_numbers:
         logging.info(f"Simulating {N} planets...")
         start = time.time()
-        max_deviation, energy_dev, am_dev = simulate_gpu(N, years=100, base_dt=1*24*3600, perturbation_angle=0.1)
-        print(f"max_deviation={max_deviation} for {N} planets in {time.time() - start} seconds.")
+        max_deviation, energy_dev, am_dev = simulate_gpu(N, years=num_years, base_dt=1*24*3600, perturbation_angle=0.1)
+        #print(f"max_deviation={max_deviation} for {N} planets in {time.time() - start} seconds.")
         stability_measures.append(max_deviation)
         energy_deviations.append(np.mean(np.abs(energy_dev)))
         angular_momentum_deviations.append(np.mean(np.abs(am_dev)))
@@ -209,6 +209,14 @@ def plot_results(planet_numbers, stability_measures, energy_deviations, angular_
     plt.savefig('multi_planet_stability_analysis.png')
     plt.show()
 
-# Main execution
-planet_numbers, stability_measures, energy_deviations, angular_momentum_deviations = run_simulations()
-plot_results(planet_numbers, stability_measures, energy_deviations, angular_momentum_deviations)
+def main():
+    # Main execution
+    num_bodies = int(input("how many bodies? "))
+    num_years = int(input("how many years?" ))
+    print("BEGIN SIMULATION")
+    planet_numbers, stability_measures, energy_deviations, angular_momentum_deviations = run_simulations(num_bodies, num_years)
+    print("END SIMULATION")
+    plot_results(planet_numbers, stability_measures, energy_deviations, angular_momentum_deviations)
+
+if __name__ == "__main__":
+    main()
