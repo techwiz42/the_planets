@@ -43,7 +43,7 @@ __global__ void calculate_acceleration(double *pos, double *acc, double *masses,
             }
         }
         acc[i*2] = (ax * 6.67430e-11) / mi;
-        acc[i*2+1] = (ay * 6.67430e-11 / mi;
+        acc[i*2+1] = (ay * 6.67430e-11) / mi;
     }
 }
 """
