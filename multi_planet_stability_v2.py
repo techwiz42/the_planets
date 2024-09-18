@@ -159,8 +159,8 @@ def simulate_gpu(num_planets, years, base_dt, perturbation_angle):
             am_dev = np.linalg.norm(current_angular_momentum - initial_angular_momentum) / np.linalg.norm(initial_angular_momentum)
             angular_momentum_deviation.append(am_dev)
 
-            logging.info(f"Time: {total_time/YEAR:.2f} years, Max Deviation: {max_deviation * 180/np.pi:.2f} degrees, "
-                         f"Energy Dev: {energy_dev:.2e}, Angular Momentum Dev: {am_dev:.2e}")
+            #logging.info(f"Time: {total_time/YEAR:.2f} years, Max Deviation: {max_deviation * 180/np.pi:.2f} degrees, "
+            #             f"Energy Dev: {energy_dev:.2e}, Angular Momentum Dev: {am_dev:.2e}")
 
     return max_deviation * 180 / np.pi, energy_deviation, angular_momentum_deviation
 
